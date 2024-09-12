@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { s3Client } from '../config/s3Config'
 import { Table } from 'react-bootstrap';
 import { MdDeleteForever } from "react-icons/md"
-import ReactAudio from './ReactAudio';
+//import ReactAudio from './ReactAudio';
 
 function Home() {
     const [audio, SetAudioFile] = useState(null);
@@ -62,7 +62,7 @@ function Home() {
                 <a href="/logout">Logout</a>
             </div>
             <div className='col-md-4 text-center my-3 margin'>
-            <ReactAudio />
+            {/* <ReactAudio /> */}
                 <h3>Choose a file to Upload in S3</h3>
                 <form className='my-3' id='login-form' onSubmit={handleUpload}>
                     <div className='input-group col-md-4 my-4'>
