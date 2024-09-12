@@ -13,12 +13,12 @@ function Login() {
     const handleLogin = (e) => {
         e.preventDefault();
         authenticate(email, password).then(data => {
-            console.log("Login Success :>> ", data.accessToken.jwtToken);
             localStorage.setItem('token', data.accessToken.jwtToken);
             login()
             navigate('/home')
         }).catch(err => {
-            console.log("Failed to Authenticate :>> ", err.message);
+            window.alert("Email or Password is not valid!!");
+            return false;
         })
     }
 

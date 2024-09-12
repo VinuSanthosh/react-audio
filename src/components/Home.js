@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { s3Client } from '../config/s3Config'
 import { Table } from 'react-bootstrap';
 import { MdDeleteForever } from "react-icons/md"
+import ReactAudio from './ReactAudio';
 
 function Home() {
     const [audio, SetAudioFile] = useState(null);
@@ -24,7 +25,7 @@ function Home() {
 
     const handleUpload = (e) => {
         e.preventDefault();
-        if(audio == null){
+        if(audio == null) {
             window.alert("Please choose a file to upload");
             return false;
         }
@@ -33,9 +34,12 @@ function Home() {
                 s3Client.listFiles().then(response =>
                     setFileList(response?.data?.Contents ?? [])
                 )
-
             )
             .catch(err => console.log(err))
+            .finally(
+                window.alert("Uploaded successfully in s3"),
+                SetAudioFile()
+            )
     }
 
     const deleteHandler = async(fileName) => {
@@ -58,6 +62,7 @@ function Home() {
                 <a href="/logout">Logout</a>
             </div>
             <div className='col-md-4 text-center my-3 margin'>
+            <ReactAudio />
                 <h3>Choose a file to Upload in S3</h3>
                 <form className='my-3' id='login-form' onSubmit={handleUpload}>
                     <div className='input-group col-md-4 my-4'>
@@ -77,7 +82,7 @@ function Home() {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>File</th>
+                            <th>File Name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
